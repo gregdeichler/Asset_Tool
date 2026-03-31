@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>ModernAssetTool.App</RootNamespace>
+    <AssemblyName>AssetTool</AssemblyName>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0-final</InformationalVersion>
+    <Company>Vassar College CIS</Company>
+    <Product>Asset Tool</Product>
+    <Description>Internal Vassar College CIS asset assignment and workstation provisioning utility.</Description>
+    <ApplicationIcon>Assets\AssetTool.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MainWindow.xaml.cs" />
+    <Compile Remove="release\**\*.cs" />
+    <Page Remove="MainWindow.xaml" />
+    <Page Remove="release\**\*.xaml" />
+    <EmbeddedResource Remove="release\**\*" />
+    <None Remove="release\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\AssetTool.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Assets\AssetTool.ico</Link>
+    </Content>
+  </ItemGroup>
+</Project>

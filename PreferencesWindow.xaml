@@ -1,0 +1,65 @@
+<Window x:Class="ModernAssetTool.App.PreferencesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Asset Tool Preferences"
+        Icon="Assets/AssetTool.ico"
+        Width="720"
+        Height="450"
+        MinHeight="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#F7FAFD"
+        FontFamily="Segoe UI Variable Text">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Webhook preferences"
+                   Style="{StaticResource SectionTitleStyle}"
+                   FontSize="24" />
+        <TextBlock Grid.Row="1"
+                   Margin="0,10,0,0"
+                   Text="Update the endpoints used for submissions. Both values must be valid http or https URLs."
+                   Style="{StaticResource BodyTextStyle}" />
+
+        <TextBlock Grid.Row="2" Margin="0,22,0,8" Text="Primary webhook" Style="{StaticResource FieldLabelStyle}" />
+        <TextBox x:Name="PrimaryWebhookTextBox"
+                 Grid.Row="3"
+                 Style="{StaticResource ModernTextBoxStyle}" />
+
+        <StackPanel Grid.Row="4" Margin="0,20,0,0">
+            <TextBlock Text="Secondary webhook" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox x:Name="SecondaryWebhookTextBox"
+                     Style="{StaticResource ModernTextBoxStyle}" />
+        </StackPanel>
+
+        <Grid Grid.Row="5" Margin="0,34,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="StatusText"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MutedInkBrush}" />
+
+            <Button Grid.Column="1"
+                    Margin="0,0,12,0"
+                    Click="CancelButton_OnClick"
+                    Style="{StaticResource GhostButtonStyle}"
+                    Content="Cancel" />
+
+            <Button Grid.Column="2"
+                    Click="SaveButton_OnClick"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Content="Save" />
+        </Grid>
+    </Grid>
+</Window>

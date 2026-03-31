@@ -1,0 +1,23 @@
+App name: Asset Tool
+Version: 1.0.0
+
+Recommended Intune configuration
+Install command:
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+
+Uninstall command:
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%ProgramFiles%\Vassar College\Asset Tool\uninstall.ps1" -Quiet
+
+Install behavior:
+System
+
+Device restart behavior:
+Determine behavior based on return codes
+
+Detection:
+Use a custom detection script and upload detect.ps1
+
+Notes:
+- The package includes the Microsoft .NET Desktop Runtime 10 x64 installer.
+- The installer checks for Microsoft.WindowsDesktop.App 10.x and installs it if missing.
+- The app installs to %ProgramFiles%\Vassar College\Asset Tool.

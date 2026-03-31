@@ -1,0 +1,8 @@
+bin/
+obj/
+release/
+.dotnet/
+.nuget/
+AppData/
+*.user
+*.suo
