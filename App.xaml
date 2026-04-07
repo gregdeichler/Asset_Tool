@@ -5,7 +5,7 @@
     <Application.Resources>
         <Color x:Key="PageTopColor">#FFF8EF</Color>
         <Color x:Key="PageBottomColor">#FFF8EF</Color>
-        <Color x:Key="CardColor">#FAFCFF</Color>
+        <Color x:Key="CardColor">#FCFEFF</Color>
         <Color x:Key="InkColor">#2D2D2D</Color>
         <Color x:Key="MutedInkColor">#63666A</Color>
         <Color x:Key="AccentColor">#951829</Color>

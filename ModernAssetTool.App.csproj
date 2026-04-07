@@ -19,11 +19,33 @@
 
   <ItemGroup>
     <Compile Remove="MainWindow.xaml.cs" />
+    <Compile Remove="MigrationWindow.xaml.cs" />
+    <Compile Remove="Models\MigrationManifest.cs" />
+    <Compile Remove="Models\PrinterSnapshot.cs" />
+    <Compile Remove="Models\ProfileCandidate.cs" />
+    <Compile Remove="Models\UsmtRuleSet.cs" />
+    <Compile Remove="Services\MigrationManifestService.cs" />
+    <Compile Remove="Services\PrinterDiscoveryService.cs" />
+    <Compile Remove="Services\ProfileDiscoveryService.cs" />
+    <Compile Remove="Services\UsmtService.cs" />
     <Compile Remove="release\**\*.cs" />
+    <Compile Remove="obj\**\*.cs" />
+    <Compile Remove="bin\**\*.cs" />
+    <Compile Remove=".tmpobj\**\*.cs" />
     <Page Remove="MainWindow.xaml" />
+    <Page Remove="MigrationWindow.xaml" />
     <Page Remove="release\**\*.xaml" />
+    <Page Remove="obj\**\*.xaml" />
+    <Page Remove="bin\**\*.xaml" />
+    <Page Remove=".tmpobj\**\*.xaml" />
     <EmbeddedResource Remove="release\**\*" />
+    <EmbeddedResource Remove="obj\**\*" />
+    <EmbeddedResource Remove="bin\**\*" />
+    <EmbeddedResource Remove=".tmpobj\**\*" />
     <None Remove="release\**\*" />
+    <None Remove="obj\**\*" />
+    <None Remove="bin\**\*" />
+    <None Remove=".tmpobj\**\*" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,6 +14,7 @@ $sourceOut = Join-Path $releaseRoot "source"
 $intuneSource = Join-Path $releaseRoot "intune-source"
 $intuneOut = Join-Path $releaseRoot "intune"
 $toolingOut = Join-Path $releaseRoot "tooling"
+$intermediateOut = Join-Path $projectRoot ".tmpobj\release-$Version\"
 $runtimeUrl = "https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.5/windowsdesktop-runtime-10.0.5-win-x64.exe"
 $runtimeFile = Join-Path $toolingOut "windowsdesktop-runtime-10.0.5-win-x64.exe"
 $intuneToolUrl = "https://raw.githubusercontent.com/microsoft/Microsoft-Win32-Content-Prep-Tool/master/IntuneWinAppUtil.exe"
@@ -27,7 +28,7 @@ if (Test-Path $releaseRoot) {
     Remove-Item -LiteralPath $releaseRoot -Recurse -Force
 }
 
-New-Item -ItemType Directory -Force -Path $releaseRoot,$appOut,$installerWork,$installerOut,$sourceOut,$intuneSource,$intuneOut,$toolingOut | Out-Null
+New-Item -ItemType Directory -Force -Path $releaseRoot,$appOut,$installerWork,$installerOut,$sourceOut,$intuneSource,$intuneOut,$toolingOut,$intermediateOut | Out-Null
 
 $env:APPDATA = Join-Path $projectRoot "AppData\Roaming"
 $env:LOCALAPPDATA = Join-Path $projectRoot "AppData\Local"
@@ -38,7 +39,7 @@ $env:NUGET_HTTP_CACHE_PATH = Join-Path $projectRoot ".nuget\http-cache"
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = "1"
 New-Item -ItemType Directory -Force -Path $env:APPDATA,$env:LOCALAPPDATA,$env:DOTNET_CLI_HOME,$env:NUGET_PACKAGES,$env:NUGET_HTTP_CACHE_PATH | Out-Null
 
-& "C:\Program Files\dotnet\dotnet.exe" build (Join-Path $projectRoot "ModernAssetTool.App.csproj") -c Release -o $appOut --configfile (Join-Path $projectRoot "NuGet.Config")
+& "C:\Program Files\dotnet\dotnet.exe" build (Join-Path $projectRoot "ModernAssetTool.App.csproj") -c Release -o $appOut --configfile (Join-Path $projectRoot "NuGet.Config") -p:BaseIntermediateOutputPath=$intermediateOut
 if ($LASTEXITCODE -ne 0) {
     throw "dotnet build failed."
 }
@@ -87,14 +88,22 @@ $sourceKeep = @(
     "SimpleMainWindow.xaml",
     "SimpleMainWindow.xaml.cs",
     "Assets",
-    "docs",
-    "Models",
-    "Services",
+    "docs\github-screenshot.png",
+    "Models\AppSettings.cs",
+    "Models\InventorySnapshot.cs",
+    "Models\RenameCredentials.cs",
+    "Services\AppSettingsService.cs",
+    "Services\InventoryService.cs",
+    "Services\WebhookService.cs",
     "packaging"
 )
 
 foreach ($item in $sourceKeep) {
-    Copy-Item -Path (Join-Path $projectRoot $item) -Destination $sourceOut -Recurse -Force
+    $sourcePath = Join-Path $projectRoot $item
+    $destinationPath = Join-Path $sourceOut $item
+    $destinationDirectory = Split-Path -Path $destinationPath -Parent
+    New-Item -ItemType Directory -Force -Path $destinationDirectory | Out-Null
+    Copy-Item -Path $sourcePath -Destination $destinationPath -Recurse -Force
 }
 
 Compress-Archive -Path (Join-Path $sourceOut "*") -DestinationPath (Join-Path $releaseRoot $sourceArchiveName) -Force
